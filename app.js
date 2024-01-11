@@ -19,10 +19,15 @@ app.get("/getWeathert/:data", async (req, res) => {
   const response = await fetch(apiURL);
   const jsonData = await response.json();
   res.json(jsonData);
-  addToDbs(jsonData);
-  // console.log(jsonData.data[0].app_temp);
 });
 
-function addToDbs(data) {
-  database.insert(data);
-}
+app.get("/getaqi/:data", async (req, res) => {
+  const latLon = req.params.data.split(",");
+  const lat = latLon[0];
+  const lon = latLon[1];
+  const apiKey = "c8fc628a5963e966c0674716b3250adb";
+  const apiURL = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  const response = await fetch(apiURL);
+  const jsonData = await response.json();
+  res.json(jsonData);
+});
