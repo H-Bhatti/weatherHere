@@ -28,6 +28,8 @@ app.get("/getAPIData/:data", async (req, res) => {
   // console.log(aqJsonData.list[0].main.aqi);
 
   const sendData = {
+    lat,
+    lon,
     temp: tempJson.data[0].app_temp,
     aqi: aqJsonData.list[0].main.aqi,
     timestamp: aqJsonData.list[0].dt,
@@ -35,4 +37,10 @@ app.get("/getAPIData/:data", async (req, res) => {
   res.json(sendData);
 
   database.insert(sendData);
+});
+
+app.get("/api", async (req, res) => {
+  database.find({}, function (err, docs) {
+    res.json(docs);
+  });
 });
