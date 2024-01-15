@@ -15,6 +15,7 @@ async function getData() {
   data.forEach((element) => {
     const marker = L.marker(element).addTo(map);
 
+    // text to popup on markers
     const text = `<p>TimeStamp: ${new Date(element.timestamp * 1000)}</span></p>
     <span>Latitude: ${element.lat}</span>° </span>
     <span> | Longitude: ${element.lon}</span>°</span>
